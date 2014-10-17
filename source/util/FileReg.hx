@@ -12,7 +12,7 @@ class FileReg
 	private static inline var imgPath:String = "assets/images/";
 	private static inline var mscPath:String = "assets/music/";
 	//MUSIC//
-	public static inline var mscBG:String = mscPath + "HaxeFlixel_Tutorial_Game.wav";
+	public static inline var mscBG:String = mscPath + #if (flash) "HaxeFlixel_Tutorial_Game.mp3" #else "HaxeFlixel_Tutorial_Game.ogg" #end;
 	//SOUNDS//
 	public static inline var sndHit:String = sndPath + "hit.wav";
 	public static inline var sndFire:String = sndPath + "fire.wav";

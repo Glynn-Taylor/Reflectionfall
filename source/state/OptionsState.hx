@@ -27,8 +27,6 @@ class OptionsState extends FlxState
 	private var _btnClearData:FlxButton;				//Clear saved setting
 	private var _btnBack:FlxButton;						//Back to menu button
 	
-	private var _save:FlxSave;							//Save object for saving settings
-	
 	//Initialisation
 	override public function create():Void 
 	{
@@ -71,9 +69,9 @@ class OptionsState extends FlxState
 		_btnBack = new FlxButton((FlxG.width/2)+10, FlxG.height-28, "Back", clickBack);
 		add(_btnBack);
 		
-		_save = new FlxSave(); 							// create and bind our save object to "reflection"
-		_save.bind("reflection");
-
+		FlxG.save.data.volume=FlxG.sound.volume;
+		FlxG.save.flush();								//Commits save
+		
 		updateVolume();									// update our bar to show the current volume level
 		
 		FlxG.camera.fade(FlxColor.BLACK, .33, true);	//Fade in
@@ -83,14 +81,14 @@ class OptionsState extends FlxState
 	//Erases saved data
 	private function clickClearData():Void
 	{
-		_save.erase();
+		FlxG.save.data.volume = 0.5;					//Update save vol
+		FlxG.save.flush();
 		FlxG.sound.volume = .5;							//Reset volume
 		updateVolume();									//Update displayed volume
 	}
 	//Handles back button
 	private function clickBack():Void
 	{
-		_save.close();
 		FlxG.switchState(new MenuState());
 	}
 	
@@ -98,14 +96,16 @@ class OptionsState extends FlxState
 	private function clickVolumeDown():Void
 	{
 		FlxG.sound.volume -= 0.1;						//Update game sound vol
-		_save.data.volume = FlxG.sound.volume;			//Update save vol
+		FlxG.save.data.volume = FlxG.sound.volume;			//Update save vol
+		FlxG.save.flush();
 		updateVolume();									//Update display
 	}
 	//Handles incrementing volume
 	private function clickVolumeUp():Void
 	{
 		FlxG.sound.volume += 0.1;
-		_save.data.volume = FlxG.sound.volume;
+		FlxG.save.data.volume = FlxG.sound.volume;			//Update save vol
+		FlxG.save.flush();
 		updateVolume();
 	}
 	//Updates the displayed volume text+bar
@@ -119,15 +119,13 @@ class OptionsState extends FlxState
 	override public function destroy():Void 
 	{
 		super.destroy();
-		_txtTitle = FlxDestroyUtil.destroy(_txtTitle);
+		/*_txtTitle = FlxDestroyUtil.destroy(_txtTitle);
 		_barVolume = FlxDestroyUtil.destroy(_barVolume);
-		_txtVolume = FlxDestroyUtil.destroy(_txtVolume);
+		_txtVolume = FlxDestroyUtil.destroy(_txtVolume);			//Flash crashes???
 		_txtVolumeAmt = FlxDestroyUtil.destroy(_txtVolumeAmt);
 		_btnVolumeDown = FlxDestroyUtil.destroy(_btnVolumeDown);
 		_btnVolumeUp = FlxDestroyUtil.destroy(_btnVolumeUp);
 		_btnClearData = FlxDestroyUtil.destroy(_btnClearData);
-		_btnBack = FlxDestroyUtil.destroy(_btnBack);
-		_save.destroy();
-		_save = null;
+		_btnBack = FlxDestroyUtil.destroy(_btnBack);*/
 	}
 }

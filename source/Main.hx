@@ -70,14 +70,12 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 		
 		//Load save data
-		var _save:FlxSave = new FlxSave();
-		_save.bind("reflection");					//Bind savefile to save
-		if (_save.data.volume != null)
+		if (FlxG.save.data.volume!= null)
 		{
-			FlxG.sound.volume = _save.data.volume;	//Load volume setting
+			FlxG.sound.volume = FlxG.save.data.volume;	//Load volume setting
 		}
-		_save.close();								//Close filestream
 		
 		FlxG.sound.playMusic(FileReg.mscBG, 0.5, true);
+		#if (flash) flash.Lib.current.stage.quality = flash.display.StageQuality.LOW; #end
 	}
 }

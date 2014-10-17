@@ -71,10 +71,10 @@ class Player extends FlxSprite
 		_fireLine.color = color;
 		_fireLine.alpha = 0.5;
 		FlxG.state.add(_fireLine);
-		
-		_ammoText = new FlxText(0, 0, "|||", 5);
+		_ammoText = new FlxText(0, 0,0, "|||", 5);
 		_ammoText.color = 0xFFFFFF;
 		_ammoText.alpha = 0.5;
+		_ammoText.antialiasing = false;
 		FlxG.state.add(_ammoText);
 	}
 	//Runs every frame
@@ -186,11 +186,11 @@ class Player extends FlxSprite
 	{
 		super.destroy();
 		//DONT DESTROY GAMEPADS (world will end)
-		_padID = null;
-		_lastAngle = null;
-		_hasFired = null;
-		_hasDashed = null;
-		_numArrows = null;
+		//_padID = null;
+		//_lastAngle = null;							//Cant null in flash and win unless of type Null<Bool> etc
+		//_hasFired = null;
+		//_hasDashed = null;
+		//_numArrows = null;
 		_sndFire = FlxDestroyUtil.destroy(_sndFire);
 		_sndStep = FlxDestroyUtil.destroy(_sndStep);
 		_fireLine= FlxDestroyUtil.destroy(_fireLine);

@@ -57,6 +57,6 @@ class Arrow extends FlxSprite
 	override public function destroy():Void 
 	{
 		super.destroy();
-		_canPickup = null;
+		//_canPickup = null;
 	}
 }

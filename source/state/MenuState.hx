@@ -48,7 +48,7 @@ class MenuState extends FlxState
 		_mWalls.setTileProperties(1, FlxObject.NONE);				//Not collideable in menu
 		add(_mWalls);
 		
-		_title1 = new FlxText(0, 0, "Reflectionfall");				//Create title
+		_title1 = new FlxText(0, 0,0, "Reflectionfall");				//Create title
 		_title1.screenCenter();
 		_title1.y = 50;
 		_title1.x -=90;
